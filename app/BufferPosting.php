@@ -15,4 +15,8 @@ class BufferPosting extends Model
         return $this->hasOne(SocialAccounts::Class, 'id', 'account_id');
     }
 
+    public function post(){
+       return $this->belongsTo(SocialPosts::class,'post_id');
+    }
+
 }

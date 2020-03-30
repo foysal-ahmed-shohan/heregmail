@@ -184,5 +184,23 @@ class PagesController extends Controller
         return view('auth.friday');
     }
 
+    //Foysal Ahmed
+    public function bufferPosting(Request $request)
+    {
+        $search=$request->input('search','');
+        $user = User::find(Auth::id());
+        $postings=$user->bufferPostings()
+//            ->whereHas('post', function ($query) use ($search){
+//        $query->where('name', 'like', '%'.$search.'%');
+//            })
+            ->paginate();
+
+
+
+        return view('pages.buffer-posting')
+            ->with('user', $user)
+            ->with('postings', $postings);
+    }
+
 
 }
