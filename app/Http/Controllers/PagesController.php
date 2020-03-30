@@ -188,17 +188,27 @@ class PagesController extends Controller
     public function bufferPosting(Request $request)
     {
         $search=$request->input('search','');
+        $type=$request->input('group','-1');
+        $type=$type=="-1"?"%":$type;
         $user = User::find(Auth::id());
         $postings=$user->bufferPostings()
-//            ->whereHas('post', function ($query) use ($search){
-//        $query->where('name', 'like', '%'.$search.'%');
-//            })
-            ->paginate();
+            ->where('text','like',"%{$search}%")
+            ->where('type','like',"{$type}")
+            ->join('social_posts','buffer_postings.post_id',
+                    '=',
+                    'social_posts.id')
+            ->join('social_post_groups',
+                'buffer_postings.group_id',
+                '=','social_post_groups.id')
 
+
+            ->paginate();
+        $groupTypes=array_values(array_unique($postings->pluck('type')->toArray()));
 
 
         return view('pages.buffer-posting')
             ->with('user', $user)
+            ->with('types', $groupTypes)
             ->with('postings', $postings);
     }
 

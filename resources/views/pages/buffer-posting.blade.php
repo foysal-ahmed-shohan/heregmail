@@ -24,6 +24,20 @@
 							<button class="pull-right" style=" position: relative; margin-top: -27px; border: 0px; background: 0px;  padding-right: 12px; outline: none !important;"> <i class="glyphicon glyphicon-search"></i> </button>
 						</form>
 					</li>
+					<li class="text-right">
+						<form id="group-from">
+							<select class="form-control group" name="group" onchange="document.getElementById('group-from').submit()">
+								<option value="-1">All</option>
+							@foreach($types as $type)
+
+									<option value="{{$type}}">{{$type}}</option>
+								@endforeach
+							</select>
+						</form>
+
+					</li>
+					<li>
+
 				</ul>
 				<table class="table table-hover social-accounts">
 					<thead>

@@ -23,6 +23,20 @@
 							<button class="pull-right" style=" position: relative; margin-top: -27px; border: 0px; background: 0px;  padding-right: 12px; outline: none !important;"> <i class="glyphicon glyphicon-search"></i> </button>
 						</form>
 					</li>
+					<li class="text-right">
+						<form id="group-from">
+							<select class="form-control group" name="group" onchange="document.getElementById('group-from').submit()">
+								<option value="-1">All</option>
+							<?php $__currentLoopData = $types; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $type): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+
+									<option value="<?php echo e($type); ?>"><?php echo e($type); ?></option>
+								<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+							</select>
+						</form>
+
+					</li>
+					<li>
+
 				</ul>
 				<table class="table table-hover social-accounts">
 					<thead>
